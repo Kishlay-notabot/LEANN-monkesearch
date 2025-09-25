@@ -105,6 +105,11 @@ def search_files(query, top_k=15):
         for match in time_matches:
             clean_query = clean_query.replace(match["full_match"], "").strip()
 
+    # Check if clean_query is less than 4 characters
+    if len(clean_query) < 4:
+        print("Error: add more input for accurate results.")
+        return
+
     # Single query to vector DB
     searcher = LeannSearcher(INDEX_PATH)
     results = searcher.search(
